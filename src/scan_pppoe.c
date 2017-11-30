@@ -252,6 +252,7 @@ static int pppoe_send_padi(int fd, int ifindex, uint8_t *hwaddr, const char *ser
         namelen = (uint16_t) strlen(service);
     }
     if (namelen < MAX_PPPOE_PAYLOAD - pack_len) {
+        memset(&sv_name, 0, sizeof(struct pppoe_tag));
         pack_len += TAG_HDR_SIZE + namelen;
         sv_name.type = htons(TAG_SERVICE_NAME);
         sv_name.len = htons(namelen);
